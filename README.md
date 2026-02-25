@@ -1,4 +1,4 @@
-# Supplementary material accompanying ITP 2025 submission #68: "Finite Tree-Like Property for Multi-Modal Logic"
+# Supplementary material accompanying the paper "Finite Tree-Like Property for Multi-Modal Logic"
 
 ## Content
 
