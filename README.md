@@ -74,7 +74,7 @@ This work was formalized using Isabelle/HOL on Isabelle2025-2. To verify it, you
 | Theorem 8       | Bool_Comb       | subst_equiv                    |
 
 | Proof of  | Arguments in paper        | Theory    | Argument in theory              |
-|---------------------------------------|-----------|---------------------------------|  
+|-----------|---------------------------|-----------|---------------------------------|  
 | Theorem 6 | base case injection       | Bool_Comb | bool_comb_INJ_prop_cform_cequiv |
 | Theorem 8 | first horizontal equality | Bool_Comb | subst_prop_cform_asatis         |
 | Theorem 8 | third horizontal equality | Bool_Comb | peval_asatis                    |
