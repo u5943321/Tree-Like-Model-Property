@@ -125,8 +125,8 @@ next
 qed
 
 lemma wf_size_subst: "wf {(( c, d),  g, h). size d < size h}"
-unfolding wfP_wf_eq[symmetric]
-by (rule wfP_if_convertible_to_nat[of _ \<open>\<lambda>( c, d). size d\<close>])
+unfolding wfp_wf_eq[symmetric]
+by (rule wfp_if_convertible_to_nat[of _ \<open>\<lambda>( c, d). size d\<close>])
 auto
 
 function subst :: "('q \<Rightarrow> ('m,'p) cform) \<Rightarrow> ('m,'q) cform \<Rightarrow> ('m,'p) cform"

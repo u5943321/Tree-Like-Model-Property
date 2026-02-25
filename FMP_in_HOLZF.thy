@@ -3,9 +3,6 @@
                  The whole aim is to hide the type parameter.
  *)
 
-
-
-
 theory FMP_in_HOLZF
 imports Main Modal_Syntax Modal_Model Modal_Semantics 
           Bounded_Morphism Generated_Submodel "n-Bisimulation"
@@ -14,23 +11,17 @@ imports Main Modal_Syntax Modal_Model Modal_Semantics
 
 begin
 
-
 definition Vstruct2struct where
  "Vstruct2struct M \<equiv> (elts (fst M),(fst (snd M)),snd (snd M))"
 
 definition is_Vstruct where
  "is_Vstruct sig M \<equiv> is_struct sig (Vstruct2struct M)"
 
-
-
 definition Vsatis where
 "Vsatis M w phi \<equiv> asatis (Vstruct2struct M) w phi"
 
-
-
 abbreviation Vworld where
 "Vworld M \<equiv> elts (fst M)"
-
 
 abbreviation Vrel where
 "Vrel M \<equiv> fst (snd M)"
@@ -68,7 +59,6 @@ next
   then show ?case 
     by (smt (verit, ccfv_SIG) Range.intros im_rel_def image_eqI mem_Collect_eq snd_conv) 
 qed
-
 
 theorem im_rel_trancl_preimage':
   assumes i:"inj_on i (Domain R \<union> Range R)"
@@ -130,7 +120,6 @@ proof -
   then show ?thesis using subsetI 
     by (meson \<open>\<And>iy ix. (ix, iy) \<in> im_rel i (R\<^sup>+) \<Longrightarrow> (ix, iy) \<in> (im_rel i R)\<^sup>+\<close> pred_equals_eq2)
 qed
-
 
 theorem rtrancl_inj:
   assumes "inj_on i (Domain R \<union> Range R)"
@@ -240,9 +229,8 @@ proof -
       then have "list.set (x0 # ul) \<subseteq> W" using ss0 
         using rset_def by fastforce
       then have "iR m (i x0 # map i ul)" unfolding iR_def
-      x0ul 
-        by (smt (verit, ccfv_threshold) i inj_on_contraD inj_on_image_eq_iff list.inj_map_strong 
-        list.set_map list.simps(9) subset_inj_on x0ul)
+      x0ul
+        by (smt (verit, best) i inj_onD list.inj_map_strong list.simps(9) subset_code(1) x0ul)
       then have "(i x0, i y0) \<in> (gen_birel \<tau> iR)"
         using \<open>m \<in> \<tau>\<close> \<open>y0 \<in> list.set ul\<close> gen_birel_def by fastforce
       then have "(x,y) \<in> gen_birel \<tau> iR" 
@@ -305,8 +293,6 @@ proof -
    \<open>i r \<in> i ` W\<close> by blast
 qed
 
-
-
 definition inj_rel where 
 "inj_rel i W R \<equiv> 
  \<lambda>m wl. if (\<exists>wl0. list.set wl0 \<subseteq> W \<and> map i wl0 =wl) 
@@ -319,7 +305,6 @@ definition inj_valt where
 definition inj_struct where
 "inj_struct i M \<equiv> 
  (i ` world M, inj_rel i (world M) (rel M), inj_valt i (world M) (valt M))"
-
 
 lemma inj_asatis :
   assumes "inj_on i (world M)"
@@ -340,7 +325,6 @@ next
   case (cNOT f)
   then show ?case 
     by (simp add: inj_struct_def)
-  
 next
   case (cDIAM m fl)
   {assume lhs: "asatis M w (cDIAM m fl) "
@@ -352,8 +336,8 @@ next
     have "list.set (w # vl) \<subseteq> world M" 
       by (metis asatis_in_world cDIAM.hyps(2) in_set_impl_in_set_zip1 len sat set_ConsD subsetI)
     have "\<And>wvl'. list.set wvl' \<subseteq> world M \<and> map i wvl' = map i (w # vl) ==> wvl' =(w # vl)  "
-   using  inj_on_def 
-   by (meson \<open>list.set (w # vl) \<subseteq> world M\<close> assms(1) inj_on_map_eq_map le_sup_iff subset_inj_on)
+      using  inj_on_def 
+      by (smt (verit, best) \<open>list.set (w # vl) \<subseteq> world M\<close> assms(1) list.inj_map_strong subsetD)
     then have "rel (inj_struct i M) m (i w # map i vl) " unfolding inj_struct_def copy_rel_def
      
       by (smt (verit) \<open>list.set (w # vl) \<subseteq> world M\<close> fst_conv inj_rel_def list.simps(9)
@@ -405,7 +389,6 @@ next
   then show ?case 
     using \<open>asatis M w (cDIAM m fl) \<Longrightarrow> asatis (inj_struct i M) (i w) (cDIAM m fl)\<close> by blast
 qed
-
 
 theorem Finite_Tree_Model_Property_V:
   assumes wff:"wff sig00 \<phi>"
@@ -617,6 +600,5 @@ proof -
   qed
 qed
 qed
-
 
 end

@@ -20,8 +20,8 @@ next
 qed
 
 lemma wf_size_csatis: "wf {((a, b, c, d), e, f, g, h). size d < size h}"
-unfolding wfP_wf_eq[symmetric]
-by (rule wfP_if_convertible_to_nat[of _ \<open>\<lambda>(a, b, c, d). size d\<close>])
+unfolding wfp_wf_eq[symmetric]
+by (rule wfp_if_convertible_to_nat[of _ \<open>\<lambda>(a, b, c, d). size d\<close>])
 auto
 
 
@@ -161,8 +161,8 @@ next
 qed
 
 lemma wf_size_asatis: "wf {(( b, c, d), f, g, h). size d < size h}"
-unfolding wfP_wf_eq[symmetric]
-by (rule wfP_if_convertible_to_nat[of _ \<open>\<lambda>( b, c, d). size d\<close>])
+unfolding wfp_wf_eq[symmetric]
+by (rule wfp_if_convertible_to_nat[of _ \<open>\<lambda>( b, c, d). size d\<close>])
 auto
 
 
@@ -355,16 +355,9 @@ where
 "cequiv (TYPE ('a)) f1 f2 \<equiv> 
  (\<forall>M w::'a.  asatis M w f1 = asatis M w f2)"
 
-
-
 lemma cequiv_equiv: 
 "equiv UNIV {(f1,f2) . cequiv (TYPE ('a)) f1 f2}"
-  using cequiv_def equiv_def 
-  by (auto) (smt (verit, best) case_prodD case_prodI cequiv_def 
-   equivI mem_Collect_eq reflI symI transp_def transp_trans)
-
-
-
+  unfolding cequiv_def equiv_def refl_on_def sym_on_def trans_on_def by simp 
 
 definition cequiv_on :: 
 "('a::type) itself \<Rightarrow> ('m,'p) cform set \<Rightarrow>
@@ -374,11 +367,7 @@ definition cequiv_on ::
 
 lemma cequiv_relation_equiv: 
 "equiv C (cequiv_on TYPE('a) C)"
-  unfolding cequiv_on_def
-  by (smt (verit, best) case_prodI2 cequiv_def equiv_def 
-mem_Collect_eq old.prod.case refl_on_def' symI transp_def transp_trans)
-
-
+  unfolding cequiv_on_def cequiv_def equiv_def refl_on_def sym_on_def trans_on_def by auto 
 
 lemma cequiv_cequiv_on:
   assumes "cequiv TYPE('a) f1 f2"
@@ -387,19 +376,14 @@ lemma cequiv_cequiv_on:
   unfolding cequiv_def cequiv_on_def 
   by blast
 
-
-
 lemma cequiv_cNOT_cong: 
 "cequiv TYPE('a) a b \<Longrightarrow> cequiv TYPE('a) (cNOT a) (cNOT b)"
   by (simp add: cequiv_def)
-
 
 lemma cequiv_cDISJ_cong: 
 "cequiv TYPE('a) a1 a2 \<Longrightarrow>cequiv TYPE('a) b1 b2 \<Longrightarrow>
  cequiv TYPE('a) (cDISJ a1 b1) (cDISJ a2 b2)"
   by (simp add: cequiv_def)
-
-
 
 lemma cequiv_on_subseteq:
   assumes "A\<subseteq> B"
@@ -429,8 +413,6 @@ proof -
   show ?thesis unfolding cequiv_def 
     using \<open>\<not> asatis M a0 \<diamondsuit>m fl\<close> \<open>asatis M a0 (cVAR a)\<close> by blast
 qed
-
-
 
 lemma cDIAM_cequiv_cong:
   assumes 
@@ -643,8 +625,6 @@ next
 qed
 qed
 
-
-
 definition restrict_sig:
  "restrict_sig sig oprs plts \<equiv>
   ((ops sig \<inter> oprs,arity sig),props sig \<inter> plts)"
@@ -658,7 +638,6 @@ lemma restrict_struct_struct:
   using assms unfolding is_struct_def fst_conv snd_conv
 restrict_valt_def restrict_rel_def 
   by blast
-
 
 lemma satis_all_P:
   assumes w1:"w1 \<in> world M1"
@@ -704,7 +683,6 @@ proof -
   }
   then show ?thesis using eqk deg by blast
 qed
-
 
 lemma csatis_struct_cVAR:
   assumes "is_struct sig M"
