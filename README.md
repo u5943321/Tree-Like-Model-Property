@@ -1,33 +1,32 @@
 # Supplementary material accompanying ITP 2025 submission #68: "Finite Tree-Like Property for Multi-Modal Logic"
 
-
 ## Content
 
 This archive contains the following files (ordered by dependency):
 
-Modal_Syntax: basic facts about the syntax of modal logic, including signatures
-Modal_Model: basic definition and lemmas about structures for modal logic
-Modal_Semantics: basic definition and lemmas about structures for modal logic
-Bool_Comb: lemmas about boolean combination (to prove Theorem 6)
-Disjoint_Union: definition of disjoint union of structures, and application of it to prove the congruence theorem (Theorem 5 in our paper).
-deg_wffs: the proof that we have only finitely many modal formulas of degree no more than n up to equivalence (Theorem 6)
-Bounded_Morphism: the definition of bounded morphism and the proof that a world and its image under a bounded morphism satisfy the same modal formulas (required by the tree-like property)
-Generated_Submodel: about generated substructures
-Tree_Like_Model: definition of a tree, and the proof of the tree-like property
-n-Bisimulation: the definition of n-bisimulation and the proof that worlds that are linked by an n-bisimulation satisfy the same modal formulas up to degree n
-Finite_Model: intermediate lemmas and definitions required for constructing the world set of the finite tree-like structure
-Upgraded_TLP_and_FMP: The proofs of the strengthened version of tree-like property and finite-tree-like property, where the strengthen happens in the sense described in the paragraph between Theorem 18 and its proof
-FMP_in_HOLZF: the proof of the main theorem (Theorem 18)
+- Modal_Syntax: basic facts about the syntax of modal logic, including signatures
+- Modal_Model: basic definition and lemmas about structures for modal logic
+- Modal_Semantics: basic definition and lemmas about structures for modal logic
+- Bool_Comb: lemmas about boolean combination (to prove Theorem 6)
+- Disjoint_Union: definition of disjoint union of structures, and application of it to prove the congruence theorem (Theorem 5 in our paper).
+- deg_wffs: the proof that we have only finitely many modal formulas of degree no more than n up to equivalence (Theorem 6)
+- Bounded_Morphism: the definition of bounded morphism and the proof that a world and its image under a bounded morphism satisfy the same modal formulas (required by the tree-like property)
+- Generated_Submodel: about generated substructures
+- Tree_Like_Model: definition of a tree, and the proof of the tree-like property
+- n-Bisimulation: the definition of n-bisimulation and the proof that worlds that are linked by an n-bisimulation satisfy the same modal formulas up to degree n
+- Finite_Model: intermediate lemmas and definitions required for constructing the world set of the finite tree-like structure
+- Upgraded_TLP_and_FMP: The proofs of the strengthened version of tree-like property and finite-tree-like property, where the strengthen happens in the sense described in the paragraph between Theorem 18 and its proof
+- FMP_in_HOLZF: the proof of the main theorem (Theorem 18)
 
 
 ## Instructions to verify the results
 
-This work was formalized using Isabelle/HOL on Isabelle2024. To verify it, you must follow these steps:
+This work was formalized using Isabelle/HOL on Isabelle2025-2. To verify it, you must follow these steps:
 
-1. Download Isabelle2024 here: https://www.isabelle.in.tum.de/index.html 
+1. Download Isabelle2025-2 here: https://www.isabelle.in.tum.de/index.html 
 (or, if a later version of isabelle is available from the main page, go to: https://www.isabelle.in.tum.de/download_past.html)
 
-2. Install Isabelle2024 on your system following the instructions here: https://www.isabelle.in.tum.de/installation.html
+2. Install Isabelle2025-2 on your system following the instructions here: https://www.isabelle.in.tum.de/installation.html
 
 3. Open the file FMP_in_HOLZF and go to the end of the file. This will ensure Isabelle runs through all the theories in this work
 
