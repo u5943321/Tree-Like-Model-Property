@@ -487,11 +487,10 @@ proof -
   sk:"(\<And>\<phi>. \<phi> \<in> C \<Longrightarrow> subst \<sigma> (sk \<phi>) = \<phi> 
   \<and> prop_cform (sk \<phi>) \<and> 
   prop_letters (sk \<phi>) \<subseteq>  {n. n < card fs})"
-    using choice C_def bool_combs_def
-    by (metis mem_Collect_eq sigma) 
+    using C_def bool_combs_def by (metis mem_Collect_eq sigma) 
   obtain r where
   r:"(\<And>\<phi>s. \<phi>s \<in> C // cequiv_on TYPE('a) C \<Longrightarrow> r \<phi>s \<in> \<phi>s)"
-    using C_def cequiv_equiv
+    using C_def
     by (metis all_not_in_conv cequiv_relation_equiv 
        in_quotient_imp_non_empty)
   have i: "inj_on 
@@ -505,8 +504,8 @@ proof -
   have fin:"finite {vs | vs. \<forall>v q. v \<in> vs \<longrightarrow> v q --> q  \<in> {n. n < card fs}} "
     using finite_valuation_set by blast
   have ss: "(\<lambda>\<phi>s. {v. peval v (sk (r \<phi>s)) \<and>
-   (\<forall>q. v q \<longrightarrow> q \<in> {n. n < card fs})}) `
-  bool_combs fs // cequiv_on TYPE('a) (bool_combs fs)
+    (\<forall>q. v q \<longrightarrow> q \<in> {n. n < card fs})}) `
+    (bool_combs fs // cequiv_on TYPE('a) (bool_combs fs))
   \<subseteq> {vs |vs. \<forall>v q. v \<in> vs \<longrightarrow> v q \<longrightarrow> q \<in> {n. n < card fs}}"
    by blast
   show "finite (bool_combs fs //cequiv_on TYPE('a) (bool_combs fs))"

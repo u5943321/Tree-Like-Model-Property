@@ -12,10 +12,10 @@ imports Main Modal_Syntax Modal_Model Modal_Semantics
 begin
 
 definition Vstruct2struct where
- "Vstruct2struct M \<equiv> (elts (fst M),(fst (snd M)),snd (snd M))"
+"Vstruct2struct M \<equiv> (elts (fst M),(fst (snd M)),snd (snd M))"
 
 definition is_Vstruct where
- "is_Vstruct sig M \<equiv> is_struct sig (Vstruct2struct M)"
+"is_Vstruct sig M \<equiv> is_struct sig (Vstruct2struct M)"
 
 definition Vsatis where
 "Vsatis M w phi \<equiv> asatis (Vstruct2struct M) w phi"
@@ -349,8 +349,7 @@ next
     {fix iv f assume "(iv, f) \<in> list.set (zip (map i vl) fl)" 
       (*critical thing is the (v,f) in the zip list*)
       obtain v where v:"v \<in> list.set vl" and "i v = iv" 
-        by (metis \<open>(iv, f) \<in> list.set (zip (map i vl) fl)\<close> \<open>list.set vl \<subseteq> world M\<close> 
-        imageE image_set set_zip_leftD)
+        by (metis \<open>(iv, f) \<in> list.set (zip (map i vl) fl)\<close> imageE image_set set_zip_leftD)
       have f: "f \<in> list.set fl"
         by (metis \<open>(iv, f) \<in> list.set (zip (map i vl) fl)\<close> set_zip_rightD)
       from cDIAM(1)[OF f ] sat
@@ -569,36 +568,35 @@ lemma Vequiv_small_type:
 proof -
   show "\<forall>M w::'a. asatis M w phi1 = asatis M w phi2"
   proof (intro allI)
-  fix M ::"'a set \<times> ('b \<Rightarrow> 'a list \<Rightarrow> bool) \<times> ('c \<Rightarrow> 'a \<Rightarrow> bool)" 
-  fix w :: "'a"
-  show "asatis M w phi1 = asatis M w phi2"
-  proof -
-  from s have sw:"small (world M)"
-    by (meson UNIV_I smaller_than_small subsetI)
-  from s obtain inc:: "'a \<Rightarrow> V" where inc: "inj inc"
-    and 
-  "range inc \<in> range elts"
-    by (meson small_def)
-    then have "small (inc ` (world M))" 
-      using sw by blast
-    have eq1:"asatis M w phi1 \<equiv> asatis (copy inc M) (inc w) phi1"
-      using copy_asatis[OF inc].
-    have eq2:"asatis M w phi2 \<equiv> asatis (copy inc M) (inc w) phi2"
-      using copy_asatis[OF inc].
-    obtain VW where "elts VW = inc ` (world M)" 
-      by (metis \<open>small (inc ` world M)\<close> small_iff)
-    then have 
-    copyeq:"copy inc M = 
-   Vstruct2struct (VW, rel (copy inc M),valt (copy inc M))"
-      by (simp add: Vstruct2struct_def copy_def)
-    have "Vsatis (VW, rel (copy inc M),valt (copy inc M)) (inc w) phi1 \<equiv> 
+    fix M ::"'a set \<times> ('b \<Rightarrow> 'a list \<Rightarrow> bool) \<times> ('c \<Rightarrow> 'a \<Rightarrow> bool)" 
+    fix w :: "'a"
+    show "asatis M w phi1 = asatis M w phi2"
+    proof -
+      from s have sw:"small (world M)"
+        by (meson UNIV_I smaller_than_small subsetI)
+      from s obtain inc:: "'a \<Rightarrow> V" where inc: "inj inc"
+        and 
+        "range inc \<in> range elts"
+        by (meson small_def)
+      then have "small (inc ` (world M))" 
+        using sw by blast
+      have eq1:"asatis M w phi1 \<equiv> asatis (copy inc M) (inc w) phi1"
+        using copy_asatis[OF inc].
+      have eq2:"asatis M w phi2 \<equiv> asatis (copy inc M) (inc w) phi2"
+        using copy_asatis[OF inc].
+      obtain VW where "elts VW = inc ` (world M)" 
+        by (metis \<open>small (inc ` world M)\<close> small_iff)
+      then have 
+        copyeq:"copy inc M = Vstruct2struct (VW, rel (copy inc M),valt (copy inc M))"
+        by (simp add: Vstruct2struct_def copy_def)
+      have "Vsatis (VW, rel (copy inc M),valt (copy inc M)) (inc w) phi1 \<equiv> 
          Vsatis (VW, rel (copy inc M),valt (copy inc M)) (inc w) phi2"
-      using Veq by (smt (verit) Vequiv_def)
-    then have "asatis (copy inc M) (inc w) phi1 \<equiv> asatis (copy inc M) (inc w) phi2"
-      unfolding Vsatis_def using copyeq by force
-    then show "asatis M w phi1 = asatis M w phi2" using eq1 eq2 by auto
+        using Veq by (smt (verit) Vequiv_def)
+      then have "asatis (copy inc M) (inc w) phi1 \<equiv> asatis (copy inc M) (inc w) phi2"
+        unfolding Vsatis_def using copyeq by force
+      then show "asatis M w phi1 = asatis M w phi2" using eq1 eq2 by auto
+    qed
   qed
-qed
 qed
 
 end

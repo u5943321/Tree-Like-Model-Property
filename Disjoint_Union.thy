@@ -743,7 +743,7 @@ proof -
   then obtain Mws where
    "\<forall>i. i < length fl \<longrightarrow> 
    asatis (fst (Mws i)) (snd (Mws i) :: 'a) (fl ! i)
-"  by meson
+"  by metis
   define Ms where "Ms \<equiv> \<lambda>i. if i \<noteq> j then (fst o Mws) i else M"
   define ws where "ws \<equiv> \<lambda>i. if i \<noteq> j then (snd o Mws) i else w"
   then have 

@@ -99,8 +99,7 @@ proof (induction phi )
   show ?case 
     using nbs[unfolded n_bisim_def, THEN conjunct2,THEN conjunct2,
               THEN conjunct1] 
-    unfolding csatis.simps nbs n_bisim_0
-    by (metis n_bisim_0 n_bisim_in_world(1) n_bisim_in_world(2) nbs) 
+    unfolding csatis.simps nbs n_bisim_0 by (metis n_bisim_0 nbs) 
 next
   case cFALSE
   then show ?case by simp

@@ -134,8 +134,7 @@ next
   then show ?case
   unfolding 
   restrict_valt_def csatis.simps fst_conv snd_conv
-     using M is_struct_def Xss
-     by metis
+     using M Xss by metis
 next
   case (cDISJ f1 f2)
   then show ?case by auto
